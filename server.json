@@ -1,0 +1,20 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+  "name": "io.github.hyperpolymath/poly-iac-mcp",
+  "title": "Polyglot IaC MCP",
+  "description": "Unified MCP server for Infrastructure as Code: Terraform, Pulumi, OpenTofu, Crossplane, CDK. Manage infrastructure declaratively from your AI assistant.",
+  "repository": {
+    "url": "https://github.com/hyperpolymath/poly-iac-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/hyperpolymath/poly-iac-mcp:main",
+      "transport": {
+        "type": "stdio"
+      }
+    }
+  ]
+}

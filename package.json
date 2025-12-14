@@ -1,0 +1,13 @@
+{
+  "name": "poly-iac-mcp",
+  "version": "1.0.0",
+  "description": "Unified MCP server for Infrastructure as Code: Terraform, Pulumi, OpenTofu, Crossplane, CDK",
+  "main": "index.js",
+  "type": "module",
+  "author": "Jonathan D.A. Jewell",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperpolymath/poly-iac-mcp.git"
+  }
+}
