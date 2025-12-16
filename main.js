@@ -7,9 +7,10 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 
 // Import ReScript compiled modules
 import * as Terraform from "./lib/es6/src/adapters/Terraform.res.js";
+import * as Pulumi from "./lib/es6/src/adapters/Pulumi.res.js";
 
-const VERSION = "1.1.0";
-const adapters = [Terraform];
+const VERSION = "1.2.0";
+const adapters = [Terraform, Pulumi];
 
 async function main() {
   const server = new McpServer({
