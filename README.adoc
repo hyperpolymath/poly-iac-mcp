@@ -1,217 +1,101 @@
-= RSR Template Repository
+= poly-iac-mcp
 :toc:
-:sectnums:
+:toc-placement!:
 
-// Badges
-image:https://img.shields.io/badge/RSR-Infrastructure-cd7f32[RSR Infrastructure]
-image:https://img.shields.io/badge/Phase-Maintenance-brightgreen[Phase]
-image:https://img.shields.io/badge/License-AGPL%20OR%20Palimpsest-blue[License]
-image:https://img.shields.io/badge/Guix-Primary-purple?logo=gnu[Guix]
+Unified MCP server for Infrastructure as Code management. Provides Model Context Protocol tools for managing infrastructure through Terraform/OpenTofu and Pulumi.
+
+toc::[]
 
 == Overview
 
-**The canonical template for RSR (Rhodium Standard Repository) projects.**
+poly-iac-mcp exposes Infrastructure as Code capabilities through the Model Context Protocol (MCP), enabling AI assistants and other MCP clients to plan, apply, and manage infrastructure across multiple IaC platforms. FOSS-first: OpenTofu is preferred over Terraform when available.
 
-This repository provides the standardized structure, configuration, and tooling for all 139 repos in the hyperpolymath ecosystem. Use it to:
+== Adapters
 
-* Bootstrap new projects with RSR compliance
-* Reference the standard directory structure
-* Copy configuration templates (justfile, STATE.scm, etc.)
+=== Terraform/OpenTofu (9 tools)
+Declarative infrastructure management (prefers OpenTofu):
 
-== Quick Start
+* `terraform_init` - Initialize a working directory
+* `terraform_plan` - Generate and show an execution plan
+* `terraform_apply` - Apply infrastructure changes
+* `terraform_destroy` - Destroy infrastructure
+* `terraform_output` - Show output values from state
+* `terraform_state_list` - List resources in the state
+* `terraform_validate` - Validate the configuration files
+* `terraform_fmt` - Format configuration files
+* `terraform_version` - Show Terraform/OpenTofu version
 
-[source,bash]
-----
-# Clone the template
-git clone https://github.com/hyperpolymath/RSR-template-repo my-project
-cd my-project
+=== Pulumi (11 tools)
+Infrastructure as Code using real programming languages:
 
-# Remove template git history
-rm -rf .git
-git init
+* `pulumi_preview` - Preview changes to infrastructure
+* `pulumi_up` - Deploy infrastructure changes
+* `pulumi_destroy` - Destroy infrastructure
+* `pulumi_stack_list` - List all stacks
+* `pulumi_stack_select` - Select a stack
+* `pulumi_stack_init` - Create a new stack
+* `pulumi_stack_output` - Get stack outputs
+* `pulumi_refresh` - Refresh state from cloud
+* `pulumi_config_set` - Set a configuration value
+* `pulumi_config_get` - Get a configuration value
+* `pulumi_version` - Show Pulumi version
 
-# Customize
-sed -i 's/RSR-template-repo/my-project/g' justfile guix.scm README.adoc
+== Requirements
 
-# Enter development environment
-guix shell -D -f guix.scm
+* https://deno.land/[Deno] runtime
+* https://opentofu.org/[OpenTofu] or https://www.terraform.io/[Terraform] CLI (for Terraform tools)
+* https://www.pulumi.com/[Pulumi] CLI (for Pulumi tools)
 
-# Validate compliance
-just validate-rsr
-----
+== FOSS-First Philosophy
 
-== What's Included
+This MCP server prefers open source alternatives:
 
-[cols="1,3"]
-|===
-|File/Directory |Purpose
+* **OpenTofu** is preferred over Terraform when both are available
+* Binary detection automatically selects the FOSS option first
 
-|`.editorconfig`
-|Editor configuration (indent, charset)
-
-|`.gitignore`
-|Standard ignore patterns
-
-|`.guix-channel`
-|Guix channel definition
-
-|`.well-known/`
-|RFC-compliant metadata (security.txt, ai.txt, humans.txt)
-
-|`docs/`
-|Documentation directory
-
-|`guix.scm`
-|Guix package definition
-
-|`justfile`
-|Task runner with 50+ recipes
-
-|`LICENSE.txt`
-|AGPL + Palimpsest dual license
-
-|`README.adoc`
-|This file
-
-|`RSR_COMPLIANCE.adoc`
-|Compliance tracking
-
-|`STATE.scm`
-|Project state checkpoint
-|===
-
-== Justfile Features
-
-The template justfile provides:
-
-* **~10 billion recipe combinations** via matrix recipes
-* **Cookbook generation**: `just cookbook` → `docs/just-cookbook.adoc`
-* **Man page generation**: `just man` → `docs/man/project.1`
-* **RSR validation**: `just validate-rsr`
-* **STATE.scm management**: `just state-touch`, `just state-phase`
-* **Container support**: `just container-build`, `just container-push`
-* **CI matrix**: `just ci-matrix [stage] [depth]`
-
-=== Key Recipes
+== Installation
 
 [source,bash]
 ----
-just                # Show all recipes
-just help <recipe>  # Detailed help
-just info           # Project info
-just combinations   # Show matrix options
-
-just build          # Build (debug)
-just test           # Run tests
-just quality        # Format + lint + test
-just ci             # Full CI pipeline
-
-just validate       # RSR + STATE validation
-just docs           # Generate all docs
-just cookbook       # Generate justfile docs
-
-just guix-shell     # Guix dev environment
-just container-build # Build container
+git clone https://github.com/hyperpolymath/poly-iac-mcp
+cd poly-iac-mcp
+npm install
+npm run build
 ----
 
-== Directory Structure
+== Usage
 
-[source]
-----
-project/
-├── .editorconfig          # Editor settings
-├── .gitignore             # Git ignore
-├── .guix-channel          # Guix channel
-├── .well-known/           # RFC metadata
-│   ├── ai.txt
-│   ├── humans.txt
-│   └── security.txt
-├── config/                # Nickel configs (optional)
-├── docs/                  # Documentation
-│   ├── generated/
-│   ├── man/
-│   └── just-cookbook.adoc
-├── guix.scm               # Guix package
-├── justfile               # Task runner
-├── LICENSE.txt            # Dual license
-├── README.adoc            # Overview
-├── RSR_COMPLIANCE.adoc    # Compliance
-├── src/                   # Source code
-├── STATE.scm              # State checkpoint
-└── tests/                 # Tests
-----
-
-== RSR Compliance
-
-=== Language Tiers
-
-* **Tier 1** (Gold): Rust, Elixir, Zig, Ada, Haskell, ReScript
-* **Tier 2** (Silver): Nickel, Racket, Guile Scheme, Nix
-* **Infrastructure**: Guix channels, derivations
-
-=== Required Files
-
-* `.editorconfig`
-* `.gitignore`
-* `justfile`
-* `README.adoc`
-* `RSR_COMPLIANCE.adoc`
-* `LICENSE.txt` (AGPL + Palimpsest)
-* `.well-known/security.txt`
-* `.well-known/ai.txt`
-* `.well-known/humans.txt`
-* `guix.scm` OR `flake.nix`
-
-=== Prohibited
-
-* Python outside `salt/` directory
-* TypeScript/JavaScript (use ReScript)
-* CUE (use Guile/Nickel)
-* `Dockerfile` (use `Containerfile`)
-
-== STATE.scm
-
-The STATE.scm file tracks project state:
-
-[source,scheme]
-----
-(define state
-  `((metadata
-     (project . "my-project")
-     (updated . "2025-12-10"))
-    (position
-     (phase . implementation)  ; design|implementation|testing|maintenance|archived
-     (maturity . beta))        ; experimental|alpha|beta|production|lts
-    (ecosystem
-     (part-of . ("RSR Framework"))
-     (depends-on . ()))))
-----
-
-== Badge Schema
-
-Generate badges from STATE.scm:
+Run as MCP server:
 
 [source,bash]
 ----
-just badges standard
+deno run --allow-run --allow-read --allow-env main.js
 ----
 
-See `docs/BADGE_SCHEMA.adoc` for the full badge taxonomy.
+Or use the systemd service:
 
-== Ecosystem Integration
+[source,bash]
+----
+systemctl --user enable poly-iac-mcp
+systemctl --user start poly-iac-mcp
+----
 
-This template is part of:
+== Security Considerations
 
-* **STATE.scm Ecosystem**: Conversation checkpoints
-* **RSR Framework**: Repository standards
-* **Consent-Aware-HTTP**: .well-known compliance
+* Never store cloud credentials in configuration files
+* Use environment variables or secret managers for sensitive values
+* Review plans carefully before applying changes
+* Enable state encryption for sensitive infrastructure
+* Use `--auto-approve` with caution
+
+== Use Cases
+
+* Plan and apply infrastructure changes
+* Manage multiple environments (dev, staging, prod) via stacks
+* Query infrastructure state and outputs
+* Validate and format configuration files
+* Compare planned changes before deployment
 
 == License
 
-SPDX-License-Identifier: `AGPL-3.0-or-later OR LicenseRef-Palimpsest-0.5`
-
-== Links
-
-* https://github.com/hyperpolymath/elegant-STATE[elegant-STATE] - STATE.scm tooling
-* https://github.com/hyperpolymath/conative-gating[conative-gating] - Policy enforcement
-* https://rhodium.sh[Rhodium Standard] - RSR documentation
+MIT
