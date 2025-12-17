@@ -1,4 +1,4 @@
-;; RSR-template-repo - Guix Package Definition
+;; poly-iac-mcp - Guix Package Definition
 ;; Run: guix shell -D -f guix.scm
 
 (use-modules (guix packages)
@@ -8,18 +8,18 @@
              ((guix licenses) #:prefix license:)
              (gnu packages base))
 
-(define-public rsr_template_repo
+(define-public poly-iac-mcp
   (package
-    (name "RSR-template-repo")
-    (version "0.1.0")
-    (source (local-file "." "RSR-template-repo-checkout"
+    (name "poly-iac-mcp")
+    (version "1.0.0")
+    (source (local-file "." "poly-iac-mcp-checkout"
                         #:recursive? #t
                         #:select? (git-predicate ".")))
     (build-system gnu-build-system)
-    (synopsis "Guix channel/infrastructure")
-    (description "Guix channel/infrastructure - part of the RSR ecosystem.")
-    (home-page "https://github.com/hyperpolymath/RSR-template-repo")
-    (license license:agpl3+)))
+    (synopsis "Unified MCP server for Infrastructure as Code")
+    (description "Multi-tool IaC MCP server supporting Terraform, OpenTofu, Pulumi, Crossplane, and CDK.")
+    (home-page "https://github.com/hyperpolymath/poly-iac-mcp")
+    (license license:expat)))
 
 ;; Return package for guix shell
-rsr_template_repo
+poly-iac-mcp

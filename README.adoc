@@ -63,8 +63,14 @@ This MCP server prefers open source alternatives:
 ----
 git clone https://github.com/hyperpolymath/poly-iac-mcp
 cd poly-iac-mcp
-npm install
-npm run build
+deno cache main.js
+----
+
+Or with Guix:
+
+[source,bash]
+----
+guix shell -D -f guix.scm
 ----
 
 == Usage
