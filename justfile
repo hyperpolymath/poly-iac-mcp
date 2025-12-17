@@ -1,8 +1,7 @@
-# RSR-template-repo - RSR Standard Justfile Template
+# poly-iac-mcp - RSR Standard Justfile
 # https://just.systems/man/en/
 #
-# This is the CANONICAL template for all RSR projects.
-# Copy this file to new projects and customize the {{PLACEHOLDER}} values.
+# Unified MCP server for Infrastructure as Code
 #
 # Run `just` to see all available recipes
 # Run `just cookbook` to generate docs/just-cookbook.adoc
@@ -12,10 +11,10 @@ set shell := ["bash", "-uc"]
 set dotenv-load := true
 set positional-arguments := true
 
-# Project metadata - CUSTOMIZE THESE
-project := "RSR-template-repo"
-version := "0.1.0"
-tier := "infrastructure"  # 1 | 2 | infrastructure
+# Project metadata
+project := "poly-iac-mcp"
+version := "1.0.0"
+tier := "infrastructure"
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # DEFAULT & HELP
@@ -218,14 +217,14 @@ man:
     #!/usr/bin/env bash
     mkdir -p docs/man
     cat > docs/man/{{project}}.1 << EOF
-.TH RSR-TEMPLATE-REPO 1 "$(date +%Y-%m-%d)" "{{version}}" "RSR Template Manual"
+.TH POLY-IAC-MCP 1 "$(date +%Y-%m-%d)" "{{version}}" "poly-iac-mcp Manual"
 .SH NAME
-{{project}} \- RSR standard repository template
+{{project}} \- Unified MCP server for Infrastructure as Code
 .SH SYNOPSIS
 .B just
 [recipe] [args...]
 .SH DESCRIPTION
-Canonical template for RSR (Rhodium Standard Repository) projects.
+Unified MCP server for Infrastructure as Code (Terraform, OpenTofu, Pulumi).
 .SH AUTHOR
 Hyperpolymath <hyperpolymath@proton.me>
 EOF

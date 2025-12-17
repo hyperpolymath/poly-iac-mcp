@@ -6,8 +6,9 @@
   "tasks": {
     "start": "deno run --allow-net --allow-read --allow-write --allow-env --allow-run main.js",
     "dev": "deno run --watch --allow-net --allow-read --allow-write --allow-env --allow-run main.js",
-    "build": "npx rescript build",
-    "clean": "npx rescript clean"
+    "check": "deno check main.js index.js",
+    "build:rescript": "deno run -A npm:rescript@12.0.0 build",
+    "clean:rescript": "deno run -A npm:rescript@12.0.0 clean"
   },
   "imports": {
     "@rescript/runtime": "npm:@rescript/runtime@12.0.1",
