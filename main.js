@@ -2,12 +2,12 @@
 // SPDX-FileCopyrightText: 2025 Jonathan D.A. Jewell
 // main.js - Entry shim for poly-iac-mcp (ReScript compiled)
 
-import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.res.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.res.js";
 
 // Import ReScript compiled modules
-import * as Terraform from "./lib/es6/src/adapters/Terraform.res.js";
-import * as Pulumi from "./lib/es6/src/adapters/Pulumi.res.js";
+import * as Terraform from "./lib/es6/src/adapters/Terraform.res.res.js";
+import * as Pulumi from "./lib/es6/src/adapters/Pulumi.res.res.js";
 
 const VERSION = "1.2.0";
 const adapters = [Terraform, Pulumi];
